@@ -1,0 +1,12 @@
+bigquery:
+  - replace: "CLOB"
+    with: "STRING"
+  - replace: "TEXT"
+    with: "STRING"
+  - replace: "INTEGER"
+    with: "INT64"
+  - replace: "NUMERIC"
+    with: "NUMERIC"
+oracle:
+  - replace: "TEXT"
+    with: "CLOB"

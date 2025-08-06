@@ -1,0 +1,7 @@
+dictionary_path: resources/diccionario.yaml
+changelog_path: C:\Users\DAD124513\Documents\CREA\traductor_liquibase\translate-liquibase-DDL\liquibase\Changelogs\db.changelog.xml
+database_config:
+  source_database: postgres
+  destination_database: bigquery
+
+output_path: output/db.changelog_modificado.xml

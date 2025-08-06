@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='utf-8'?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">    
+    <changeSet author="dad124513 (generated)" id="1753457231473-1">
+        <createTable tableName="visitas">
+            <column autoIncrement="true" name="id" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="visitas_pkey" />
+            </column>
+            <column name="nombre" type="TEXT" />
+            <column name="edad" type="INTEGER" />
+            <column name="actividad" type="TEXT" />
+            <column name="nacionalidad" type="TEXT" />
+            <column name="fecha_visita" type="date" />
+        </createTable>
+    <modifySql dbms="bigquery"><replace replace="CLOB" with="STRING" /><replace replace="TEXT" with="STRING" /><replace replace="INTEGER" with="INT64" /><replace replace="NUMERIC" with="NUMERIC" /></modifySql></changeSet>
+    <changeSet author="dad124513 (generated)" id="1753457231473-2">
+        <createTable tableName="clientes">
+            <column autoIncrement="true" name="id_cliente" startWith="7" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="clientes_pkey" />
+            </column>
+            <column name="nombre" type="VARCHAR(100)">
+                <constraints nullable="false" />
+            </column>
+            <column name="correo" type="VARCHAR(100)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    <modifySql dbms="bigquery"><replace replace="CLOB" with="STRING" /><replace replace="TEXT" with="STRING" /><replace replace="INTEGER" with="INT64" /><replace replace="NUMERIC" with="NUMERIC" /></modifySql></changeSet>
+    <changeSet author="dad124513 (generated)" id="1753457231473-3">
+        <createTable tableName="ordenes">
+            <column autoIncrement="true" name="id_orden" startWith="10" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="ordenes_pkey" />
+            </column>
+            <column name="fecha" type="date">
+                <constraints nullable="false" />
+            </column>
+            <column name="total" type="numeric(10, 2)">
+                <constraints nullable="false" />
+            </column>
+            <column name="id_cliente" type="INTEGER" />
+        </createTable>
+    <modifySql dbms="bigquery"><replace replace="CLOB" with="STRING" /><replace replace="TEXT" with="STRING" /><replace replace="INTEGER" with="INT64" /><replace replace="NUMERIC" with="NUMERIC" /></modifySql></changeSet>
+    <changeSet author="dad124513 (generated)" id="1753457231473-4">
+        <createTable tableName="pruebas">
+            <column autoIncrement="true" name="id_orden" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pruebas_pkey" />
+            </column>
+            <column name="fecha" type="date">
+                <constraints nullable="false" />
+            </column>
+            <column name="total" type="numeric(10, 2)">
+                <constraints nullable="false" />
+            </column>
+            <column name="id_cliente" type="INTEGER" />
+        </createTable>
+    <modifySql dbms="bigquery"><replace replace="CLOB" with="STRING" /><replace replace="TEXT" with="STRING" /><replace replace="INTEGER" with="INT64" /><replace replace="NUMERIC" with="NUMERIC" /></modifySql></changeSet>
+    <changeSet author="dad124513" id="insertar_orden_procedure-1">
+        <sqlFile path="../scripts/procedimiento_test.sql" relativeToChangelogFile="true" splitStatements="false" stripComments="false" />
+    </changeSet>
+    <changeSet author="dad124513 (generated)" id="1753457231473-6">
+        <addUniqueConstraint columnNames="correo" constraintName="clientes_correo_key" tableName="clientes" />
+    </changeSet>
+    <changeSet author="dad124513 (generated)" id="1753457231473-7">
+        <addForeignKeyConstraint baseColumnNames="id_cliente" baseTableName="ordenes" constraintName="ordenes_id_cliente_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_cliente" referencedTableName="clientes" validate="true" />
+    </changeSet>
+    <changeSet author="dad124513 (generated)" id="1753457231473-8">
+        <addForeignKeyConstraint baseColumnNames="id_cliente" baseTableName="pruebas" constraintName="pruebas_id_cliente_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_cliente" referencedTableName="clientes" validate="true" />
+    </changeSet>
+</databaseChangeLog>
